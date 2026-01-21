@@ -1,4 +1,4 @@
-#include "../include/text.h"
+#include "text.h"
 #include <stdio.h>
 #include <string.h>
 

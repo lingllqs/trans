@@ -1,6 +1,6 @@
-#include "../include/csv.h"
+#include "csv.h"
 
-int read_csv_record(FILE *fp, char *buf, size_t size) {
+int csv_read_record(FILE *fp, char *buf, size_t size) {
     int c;
     int in_quotes = 0;
     size_t i = 0;
