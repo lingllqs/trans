@@ -14,6 +14,6 @@
 git clone https://github.com/lingllqs/trans
 去这个仓库(https://github.com/skywind3000/ECDICT)下载ecdict.csv文件
 cd trans
-gcc -o trans ./src/main.c
+运行 make
 运行`./trans <想要查询的单词>`
 ```
