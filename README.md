@@ -11,9 +11,18 @@
 ### 使用方法
 
 ```bash
+# 克隆本仓库
 git clone https://github.com/lingllqs/trans
-去这个仓库(https://github.com/skywind3000/ECDICT)下载ecdict.csv文件
+
+# 进入仓库目录
 cd trans
-运行 make
-运行`./trans <想要查询的单词>`
+
+# 下载字典文件
+curl -fLo ./data/ecdict.csv https://raw.githubusercontent.com/skywind3000/ECDICT/refs/heads/master/ecdict.csv
+
+# 编译
+make
+
+# 查询，也可以将二进制文件添加到环境变量(PATH)中
+./trans <想要查询的单词>
 ```
