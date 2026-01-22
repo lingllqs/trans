@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -O2 -Iinclude
+CFLAGS = -Wall -O2 -Iinclude -Itests
 
 SRC = \
     src/main.c \
@@ -19,4 +19,19 @@ $(TARGET): $(OBJ)
 clean:
 	rm -f $(OBJ) $(TARGET)
 
-.PHONY: all clean
+TESTS = \
+    tests/test_csv \
+    tests/test_text \
+    tests/test_ecdict
+
+tests/%: tests/%.c src/csv.c src/text.c src/ecdict.c
+	$(CC) $(CFLAGS) -Iinclude -o $@ $^
+
+test: $(TESTS)
+	@for t in $(TESTS); do \
+	    echo "Running $$t"; \
+	    ./$$t; \
+	done
+	@echo "All tests passed"
+
+.PHONY: all clean test
