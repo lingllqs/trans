@@ -4,59 +4,59 @@
     "arguments": [
       "gcc",
       "-Wall",
+      "-Wextra",
       "-O2",
       "-Iinclude",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-D_GNU_SOURCE",
       "-c",
       "-o",
       "src/main.o",
       "src/main.c"
     ],
-    "directory": "/home/jqms/projects/c_projects/trans",
+    "directory": "/home/ruster/workspace/projects/c_projects/trans",
     "output": "src/main.o"
-  },
-  {
-    "file": "src/csv.c",
-    "arguments": [
-      "gcc",
-      "-Wall",
-      "-O2",
-      "-Iinclude",
-      "-c",
-      "-o",
-      "src/csv.o",
-      "src/csv.c"
-    ],
-    "directory": "/home/jqms/projects/c_projects/trans",
-    "output": "src/csv.o"
-  },
-  {
-    "file": "src/text.c",
-    "arguments": [
-      "gcc",
-      "-Wall",
-      "-O2",
-      "-Iinclude",
-      "-c",
-      "-o",
-      "src/text.o",
-      "src/text.c"
-    ],
-    "directory": "/home/jqms/projects/c_projects/trans",
-    "output": "src/text.o"
   },
   {
     "file": "src/ecdict.c",
     "arguments": [
       "gcc",
       "-Wall",
+      "-Wextra",
       "-O2",
       "-Iinclude",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-D_GNU_SOURCE",
       "-c",
       "-o",
       "src/ecdict.o",
       "src/ecdict.c"
     ],
-    "directory": "/home/jqms/projects/c_projects/trans",
+    "directory": "/home/ruster/workspace/projects/c_projects/trans",
     "output": "src/ecdict.o"
+  },
+  {
+    "file": "src/index.c",
+    "arguments": [
+      "gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-D_GNU_SOURCE",
+      "-c",
+      "-o",
+      "src/index.o",
+      "src/index.c"
+    ],
+    "directory": "/home/ruster/workspace/projects/c_projects/trans",
+    "output": "src/index.o"
   }
 ]
