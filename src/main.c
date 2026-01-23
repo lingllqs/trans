@@ -1,35 +1,27 @@
 #include <stdio.h>
+
 #include "ecdict.h"
-#include "text.h"
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        fprintf(stderr, "Usage: %s <word>\n", argv[0]);
+        fprintf(stderr, "usage: %s WORD\n", argv[0]);
         return 1;
     }
 
-    Entry e;
-    if (!ecdict_lookup("data/ecdict.csv", argv[1], &e)) {
-        printf("Not found: %s\n", argv[1]);
-        return 0;
+    if (ecdict_open("data/ecdict.csv") < 0) {
+        fprintf(stderr, "failed to open dictionary\n");
+        return 1;
     }
 
-    printf("%s", e.word);
-    if (e.phonetic && *e.phonetic)
-        printf(" [%s]", e.phonetic);
-    printf("\n");
-
-    if (e.definition && *e.definition) {
-        strip_trailing_quote(e.definition);
-        unescape_newlines(e.definition);
-        printf("EN:\n%s\n\n", e.definition);
+    const char *line;
+    if (ecdict_lookup(argv[1], &line) < 0) {
+        printf("not found\n");
+    } else {
+        const char *p = line;
+        while (*p && *p != '\n') putchar(*p++);
+        putchar('\n');
     }
 
-    if (e.translation && *e.translation) {
-        strip_trailing_quote(e.translation);
-        unescape_newlines(e.translation);
-        printf("ZH:\n%s\n", e.translation);
-    }
-
+    ecdict_close();
     return 0;
 }

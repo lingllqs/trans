@@ -1,13 +1,11 @@
 #ifndef ECDICT_H
 #define ECDICT_H
 
-typedef struct {
-	char *word;
-	char *phonetic;
-	char *definition;
-	char *translation;
-} Entry;
+struct ecdict;
 
-int ecdict_lookup(const char *path, const char *query, Entry *out);
+int ecdict_open(const char *path);
+void ecdict_close(void);
 
-#endif // !ECDICT_H
+int ecdict_lookup(const char *word, const char **line);
+
+#endif

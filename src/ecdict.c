@@ -1,39 +1,47 @@
 #include "ecdict.h"
-#include "csv.h"
+
+#include <fcntl.h>
 #include <stdio.h>
-#include <string.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-int ecdict_lookup(const char *path, const char *query, Entry *out) {
-    FILE *fp = fopen(path, "r");
-    if (!fp)
-        return 0;
+#include "index.h"
 
-    char line[64 * 1024];
+static int g_fd;
+static size_t g_size;
+static const char *g_csv;
+static struct index g_index;
 
-    /* 跳过表头 */
-    csv_read_record(fp, line, sizeof(line));
+int ecdict_open(const char *path) {
+    struct stat st;
 
-    while (csv_read_record(fp, line, sizeof(line))) {
-        char *cursor = line;
+    g_fd = open(path, O_RDONLY);
+    if (g_fd < 0) return -1;
 
-        char *word        = csv_next_field(&cursor);
-        char *phonetic    = csv_next_field(&cursor);
-        char *definition  = csv_next_field(&cursor);
-        char *translation = csv_next_field(&cursor);
+    if (fstat(g_fd, &st) < 0) return -1;
 
-        if (!word)
-            continue;
+    g_size = st.st_size;
 
-        if (strcmp(word, query) == 0) {
-            out->word        = word;
-            out->phonetic    = phonetic;
-            out->definition  = definition;
-            out->translation = translation;
-            fclose(fp);
-            return 1;
-        }
-    }
+    g_csv = mmap(NULL, g_size, PROT_READ, MAP_PRIVATE, g_fd, 0);
+    if (g_csv == MAP_FAILED) return -1;
 
-    fclose(fp);
+    if (index_build(&g_index, g_csv, g_size) < 0) return -1;
+
+    return 0;
+}
+
+void ecdict_close(void) {
+    index_free(&g_index);
+    munmap((void *)g_csv, g_size);
+    close(g_fd);
+}
+
+int ecdict_lookup(const char *word, const char **line) {
+    const struct index_entry *e = index_lookup(&g_index, word);
+
+    if (!e) return -1;
+
+    *line = g_csv + e->offset;
     return 0;
 }
