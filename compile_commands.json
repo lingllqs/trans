@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "file": "src/main.c",
+    "arguments": [
+      "gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-D_GNU_SOURCE",
+      "-c",
+      "-o",
+      "src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/jqms/projects/c_projects/trans",
+    "output": "src/main.o"
+  },
+  {
+    "file": "src/ecdict.c",
+    "arguments": [
+      "gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-D_GNU_SOURCE",
+      "-c",
+      "-o",
+      "src/ecdict.o",
+      "src/ecdict.c"
+    ],
+    "directory": "/home/jqms/projects/c_projects/trans",
+    "output": "src/ecdict.o"
+  },
+  {
+    "file": "src/index.c",
+    "arguments": [
+      "gcc",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-Iinclude",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-D_GNU_SOURCE",
+      "-c",
+      "-o",
+      "src/index.o",
+      "src/index.c"
+    ],
+    "directory": "/home/jqms/projects/c_projects/trans",
+    "output": "src/index.o"
+  }
+]

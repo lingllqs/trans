@@ -7,26 +7,25 @@
 static const char *g_csv;
 
 /* 索引排序用比较函数 */
-static int index_entry_cmp(const void *a, const void *b)
-{
+static int index_entry_cmp(const void *a, const void *b) {
     const struct index_entry *ea = a;
     const struct index_entry *eb = b;
 
     const char *wa = g_csv + ea->offset;
     const char *wb = g_csv + eb->offset;
 
+    // 比较最短长度
     size_t min = ea->word_len < eb->word_len ? ea->word_len : eb->word_len;
-
     int r = memcmp(wa, wb, min);
     if (r != 0)
         return r;
 
+    // 长度相同: 相当于 strcmp
     return (int)ea->word_len - (int)eb->word_len;
 }
 
 /* bsearch：key vs entry */
-static int index_word_cmp(const void *key, const void *elem)
-{
+static int index_word_cmp(const void *key, const void *elem) {
     const char *word = key;
     const struct index_entry *e = elem;
 
@@ -40,8 +39,8 @@ static int index_word_cmp(const void *key, const void *elem)
     return (int)key_len - (int)e->word_len;
 }
 
-int index_build(struct index *idx, const char *csv, size_t size)
-{
+// 构建索引数组
+int index_build(struct index *idx, const char *csv, size_t size) {
     size_t capacity = 1024;
     size_t count = 0;
 
@@ -49,13 +48,15 @@ int index_build(struct index *idx, const char *csv, size_t size)
     if (!entries)
         return -1;
 
+    // 保存基地址用于 cmp 函数
     g_csv = csv;
 
+    // 遍历索引数组
     for (size_t i = 0; i < size;) {
         // 当前word起始位置
         size_t start = i;
 
-        /* 找到 word 结尾（逗号） */
+        // 找到 word 结尾（逗号）
         while (i < size && csv[i] != ',')
             i++;
 
@@ -88,13 +89,12 @@ int index_build(struct index *idx, const char *csv, size_t size)
     return 0;
 }
 
-const struct index_entry *index_lookup(const struct index *idx, const char *word)
-{
+const struct index_entry *index_lookup(const struct index *idx, const char *word) {
+	// key, array[], num of elem, size of elem, cmp_func
     return bsearch(word, idx->entries, idx->count, sizeof(struct index_entry), index_word_cmp);
 }
 
-void index_free(struct index *idx)
-{
+void index_free(struct index *idx) {
     free(idx->entries);
     idx->entries = NULL;
     idx->count = 0;
