@@ -16,7 +16,7 @@
       "src/main.o",
       "src/main.c"
     ],
-    "directory": "/home/jqms/projects/c_projects/trans",
+    "directory": "/home/ruster/workspace/projects/c_projects/trans",
     "output": "src/main.o"
   },
   {
@@ -36,7 +36,7 @@
       "src/ecdict.o",
       "src/ecdict.c"
     ],
-    "directory": "/home/jqms/projects/c_projects/trans",
+    "directory": "/home/ruster/workspace/projects/c_projects/trans",
     "output": "src/ecdict.o"
   },
   {
@@ -56,7 +56,7 @@
       "src/index.o",
       "src/index.c"
     ],
-    "directory": "/home/jqms/projects/c_projects/trans",
+    "directory": "/home/ruster/workspace/projects/c_projects/trans",
     "output": "src/index.o"
   }
 ]

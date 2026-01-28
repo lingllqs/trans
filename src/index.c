@@ -90,7 +90,7 @@ int index_build(struct index *idx, const char *csv, size_t size) {
 }
 
 const struct index_entry *index_lookup(const struct index *idx, const char *word) {
-	// key, array[], num of elem, size of elem, cmp_func
+    // key, array[], num of elem, size of elem, cmp_func
     return bsearch(word, idx->entries, idx->count, sizeof(struct index_entry), index_word_cmp);
 }
 
